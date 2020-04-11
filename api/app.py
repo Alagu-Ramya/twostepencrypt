@@ -50,7 +50,6 @@ def initHideAndEncrypt():
     else:
         return jsonify({"message": "Allowed image types are png, jpg, jpeg."}), 400
 
-
 @app.route("/showanddecrypt", methods=['POST'])
 def initShowAndDecrypt():
     if(request.method != "POST"):

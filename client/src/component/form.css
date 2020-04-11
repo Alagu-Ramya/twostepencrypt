@@ -1,0 +1,42 @@
+.textbox{
+    border-style: hidden;
+    border-width:1px;
+    border-color: lightslategray;
+    border-radius: 5px;
+    box-shadow: lightslategray;
+    background-color: whitesmoke;
+    padding-left: 10px;
+    width: 20%;
+    height:50px
+}
+
+
+
+.submitbutton{
+border: none;
+background: darkslategray;
+color: whitesmoke !important;
+font-style:initial;
+font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+padding: 18px;
+text-transform: uppercase;
+border-radius: 50px;
+display: inline-block;
+letter-spacing: 0.5px;
+transition: all 0.3s ease 0s;
+}
+
+.submitbutton:hover {
+    
+    color: rgb(209, 213, 224) !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px;
+    background-color: teal;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+    }
+
+.submitbutton:active:after{
+    content: ' Completed!';
+}
