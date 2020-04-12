@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import './form.css'
-
+import './EncryptForm.css'
+import axios from 'axios'
 
 const EncryptForm = ()=>{
 
@@ -16,6 +16,19 @@ const EncryptForm = ()=>{
 
     const handlefilechange = (event) =>{
         setForm({file:event.target.files[0],fileName:event.target.files[0].name,text:form.text});
+        sendEncryptionData(form.text,form.file);
+    }
+
+    const sendEncryptionData = async (text,file) =>{
+        const formData = new FormData();
+        formData.append("text",text);
+        formData.append("file",file);
+        const data = await axios.post("http://localhost:5000/hideandencrypt",formData,{
+            headers: {
+                      'Content-Type': 'multipart/form-data'
+            }
+        });
+        console.log(data.data);
     }
 
     const handlesubmit = (event) =>{

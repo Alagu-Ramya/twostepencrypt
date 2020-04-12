@@ -1,5 +1,5 @@
 import uuid
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request,send_from_directory
 from pathlib import Path
 import lsb_stegno
 import n_share
@@ -25,30 +25,37 @@ def isAvailable(filename):
     return Path.is_file(Path.joinpath(app.config['CRYPTO_FOLDER'], filename))
 
 
+# @app.after_request
+# def apply_caching(response):
+#     response.headers['Access-Control-Allow-Origin'] = '*'
+#     return response
+
 @app.route("/hideandencrypt", methods=['POST'])
 def initHideAndEncrypt():
+    resp = flask.make_response()
+    resp.headers["Access-Control-Allow-Origin"] = "*"
     if(request.method != "POST"):
-        return jsonify({"message": "Only POST request is supported."}), 400
+        return resp(jsonify({"message": "Only POST request is supported."}), 400)
     if "file" not in request.files:
-        return jsonify({"message": "Please upload an image."}), 400
+        return resp(jsonify({"message": "Please upload an image."}), 400)
     file = request.files["file"]
     text = request.form["text"].strip()
     if file.filename == '':
-        return jsonify({"message": "No file selected for upload."}), 400
+        return resp(jsonify({"message": "No file selected for upload."}), 400)
     if text == '':
-        return jsonify({"message": "Text field is empty."}), 400
+        return resp(jsonify({"message": "Text field is empty."}), 400)
     if file and allowed_file(file.filename):
         fileid = str(uuid.uuid4())
         file.save(Path.joinpath(
             app.config["UPLOAD_FOLDER"], fileid+".png"))
         data = lsb_stegno.lsb_encode(fileid, text)
         filename = n_share.generate_shares(data, fileid)
-        return jsonify({
+        return resp(jsonify({
             "share1": "http://127.0.0.1:5000/cryptoimg/"+filename[0],
             "share2": "http://127.0.0.1:5000/cryptoimg/"+filename[1],
-            }), 201
+            }), 201)
     else:
-        return jsonify({"message": "Allowed image types are png, jpg, jpeg."}), 400
+        return resp(jsonify({"message": "Allowed image types are png, jpg, jpeg."}), 400)
 
 @app.route("/showanddecrypt", methods=['POST'])
 def initShowAndDecrypt():
