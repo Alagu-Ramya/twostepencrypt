@@ -6,7 +6,7 @@ const EncryptForm = ()=>{
 
     const [form,setForm] = useState({
         file:{},
-        text:"",
+        text :"",
         fileName:""
     });
 
@@ -16,7 +16,6 @@ const EncryptForm = ()=>{
 
     const handlefilechange = (event) =>{
         setForm({file:event.target.files[0],fileName:event.target.files[0].name,text:form.text});
-        sendEncryptionData(form.text,form.file);
     }
 
     const sendEncryptionData = async (text,file) =>{
@@ -24,16 +23,15 @@ const EncryptForm = ()=>{
         formData.append("text",text);
         formData.append("file",file);
         const data = await axios.post("http://localhost:5000/hideandencrypt",formData,{
-            headers: {
-                      'Content-Type': 'multipart/form-data'
-            }
+            headers: {'Content-Type': 'multipart/form-data'}
         });
         console.log(data.data);
     }
 
     const handlesubmit = (event) =>{
-        alert(`${form.text} ${form.file.name}`);
         event.preventDefault();
+        console.log(form);
+        sendEncryptionData(form.text,form.file);
     }
 
     return(

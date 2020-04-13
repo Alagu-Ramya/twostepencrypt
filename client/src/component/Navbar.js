@@ -7,8 +7,8 @@ const Navbar = ()=>{
     <div className="topnav">
         <Link className="active" to="/">Home</Link>
         <Link  to="/encrypt">Encrypt</Link>
-        <Link  to="/">Decrypt</Link>
-        <Link  to="/">About</Link> 
+        <Link  to="/decrypt">Decrypt</Link>
+        <Link  to="/about">About</Link> 
     </div>
   )
 }

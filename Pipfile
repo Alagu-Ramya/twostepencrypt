@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 pillow = "*"
 numpy = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"
