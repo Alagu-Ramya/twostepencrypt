@@ -18,8 +18,6 @@ const DecryptForm = () => {
     });
 
     const sendDecryptionData = async (share1, share2) => {
-        console.log(share1);
-        console.log(share2);
         const formData = new FormData();
         formData.append("share1", share1);
         formData.append("share2", share2);
