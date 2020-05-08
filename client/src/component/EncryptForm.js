@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './EncryptForm.css'
+import downloadIcon from '../download_icon.png'
 import axios from 'axios'
 
 const EncryptForm = () => {
@@ -11,8 +12,8 @@ const EncryptForm = () => {
     });
 
     const [encryptedImg, setencryptedImg] = useState({
-        share1: "https://via.placeholder.com/500x500?text=Your+uploaded+image+share+1+appears+here",
-        share2: "https://via.placeholder.com/500x500?text=Your+uploaded+image+share+2+appears+here"
+        share1: downloadIcon,
+        share2: downloadIcon
     });
 
     const handletexttohidechange = (event) => {
@@ -27,6 +28,7 @@ const EncryptForm = () => {
         const formData = new FormData();
         formData.append("text", text);
         formData.append("file", file);
+        console.log(formData)
         const responseData = await axios.post("http://localhost:5000/hideandencrypt", formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
@@ -36,7 +38,6 @@ const EncryptForm = () => {
 
     const handlesubmit = (event) => {
         event.preventDefault();
-        console.log(form);
         sendEncryptionData(form.text, form.file);
     }
 
@@ -62,8 +63,12 @@ const EncryptForm = () => {
                     <label className="text-left custom-file-label" htmlFor="customFile">{form.fileName}</label>
                 </div>
                 <br />
-                <button className='submitbutton' type='submit'>Encrypt</button>
                 <div>
+                <button className='submitbutton' type='submit'>Encrypt</button>
+               
+                </div>
+                <div>
+                     <br/>
                     <img className="position-relative" src={encryptedImg.share1} alt="" />
                     <a href={encryptedImg.share1} target="_blank" rel="noopener noreferrer">Download share 1</a>
                     <img className="position-relative" src={encryptedImg.share2} alt="" />

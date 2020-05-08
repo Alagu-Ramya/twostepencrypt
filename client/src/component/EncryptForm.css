@@ -40,3 +40,19 @@ transition: all 0.3s ease 0s;
 .submitbutton:active:after{
     content: ' Completed!';
 }
+
+ img{
+    border-radius: 30px;
+    padding-left: 2%;
+}
+
+a {
+    color: powderblue ;
+    padding-left: 0.5%;
+    font-size: 30px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+  a:hover {
+    color: lightpink;
+  }
