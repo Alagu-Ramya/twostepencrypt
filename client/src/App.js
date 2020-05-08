@@ -15,10 +15,7 @@ const App = () => {
           <Route exact path="/encrypt" component={EncryptForm} />
           <Route exact path="/decrypt" component={DecryptForm} />
           <Route exact path="/about" component={About} />
-          
         </Switch>
-      
-        
       </Fragment>
     </Router>
   )

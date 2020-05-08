@@ -17,17 +17,16 @@ const DecryptForm = () => {
         finalImage: "https://via.placeholder.com/500x500?text=Your+uploaded+image+final+image+appears+here",
     });
 
-    const sendDecryptionData = async (share1, share2) => {
+    const sendDecryptionData = async () => {
         const formData = new FormData();
-        formData.append("share1", share1);
-        formData.append("share2", share2);
-        console.log(formData);
+        formData.append("share1", decryptImg.share1);
+        formData.append("share2", decryptImg.share2);
         const responseData = await axios.post("/showanddecrypt", formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
         const { decrypteddata, finalImage } = responseData.data
         setdecrypted({ decrypteddata, finalImage });
-        console.log(decrypted);
+        console.log(responseData.data);
     }
     const handlefilechange1 = (event) => {
         setdecryptImg({ ...decryptImg, share1: event.target.files[0], share1fileName: event.target.files[0].name });
@@ -38,7 +37,7 @@ const DecryptForm = () => {
 
     const handlesubmit = (event) => {
         event.preventDefault();
-        sendDecryptionData(decryptImg.share1, decryptImg.share1);
+        sendDecryptionData();
     }
     return (
         <div style={{ width: "100%" }}>
