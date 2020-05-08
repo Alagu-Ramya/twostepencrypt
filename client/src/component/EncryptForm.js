@@ -66,7 +66,7 @@ const EncryptForm = ()=>{
                 
                 <br/>
             
-            
+
             <button className='submitbutton' type='submit'>Encrypt</button>
         </form>
         </div>

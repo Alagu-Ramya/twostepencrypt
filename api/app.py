@@ -12,6 +12,7 @@ DECRYPTED_FOLDER = Path.joinpath(Path(__file__).absolute().parents[1], "decrypte
 
 app = Flask(__name__)
 CORS(app)
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['CRYPTO_FOLDER'] = CRYPTO_FOLDER
 app.config['DECRYPTED_FOLDER'] = DECRYPTED_FOLDER
