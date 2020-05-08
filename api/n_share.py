@@ -30,8 +30,8 @@ def generate_shares(data, id, share=2):
 
 def compress_shares(img1Name, img2Name):
     # Read images
-    img1 = np.asarray(Image.open("../crypto_images/"+img1Name)).astype('int16')
-    img2 = np.asarray(Image.open("../crypto_images/"+img2Name)).astype('int16')
+    img1 = np.asarray(Image.open("../uploads/"+img1Name)).astype('int16')
+    img2 = np.asarray(Image.open("../uploads/"+img2Name)).astype('int16')
 
     img = np.zeros(img1.shape)
 

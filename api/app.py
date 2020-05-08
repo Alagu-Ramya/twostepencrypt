@@ -23,10 +23,6 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_IMAGE_EXTENSIONS
 
 
-def isAvailable(filename):
-    return Path.is_file(Path.joinpath(app.config['CRYPTO_FOLDER'], filename))
-
-
 @app.route("/hideandencrypt", methods=['POST'])
 def initHideAndEncrypt():
     if(request.method != "POST"):
@@ -61,17 +57,23 @@ def initShowAndDecrypt():
         return jsonify({"message": "Please upload both SHARE 1 and SHARE 2 to decrypt."}), 400
     share1 = request.files["share1"]
     share2 = request.files["share2"]
-    if share1.filename == '' or share2.filename == '':
-        return jsonify({"message": "No file selected for upload either in SHARE 1 or SHARE 2."}), 400
-    if share1 and isAvailable(share1.filename) and share2 and isAvailable(share2.filename):
-       finalImgName = n_share.compress_shares(share1.filename, share2.filename)
-       decrypteddata = lsb_stegno.lsb_decode("../decrypted_images/"+finalImgName)
-       return jsonify({
-           "finalImage": "http://127.0.0.1:5000/decryptedimg/"+finalImgName,
-           "decrypteddata": decrypteddata
-       }), 201
+    if share1.filename == '' and share2.filename == ''  :
+        return jsonify({"message": "No file selected for upload."}), 400
+    if share1 and share2 and allowed_file(share1.filename) and allowed_file(share1.filename):
+        share1id = str(uuid.uuid4())
+        share1.save(Path.joinpath(
+            app.config["UPLOAD_FOLDER"], share1id+".png"))
+        share2id = str(uuid.uuid4())
+        share2.save(Path.joinpath(
+            app.config["UPLOAD_FOLDER"], share2id+".png"))
+        finalImgName = n_share.compress_shares(share1id+".png", share2id+".png")
+        decrypteddata = lsb_stegno.lsb_decode("../decrypted_images/"+finalImgName)
+        return jsonify({
+            "finalImage": "http://127.0.0.1:5000/decryptedimg/"+finalImgName,
+            "decrypteddata": decrypteddata
+        }), 201
     else:
-        return jsonify({"message": "Please encrypt the image and upload the shares received from it."}), 400
+        return jsonify({"message": "Allowed image types are png, jpg, jpeg."}), 400
 
 
 @app.route("/cryptoimg/<string:filename>", methods=['GET'])

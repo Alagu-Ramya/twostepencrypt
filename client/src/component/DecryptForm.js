@@ -22,7 +22,7 @@ const DecryptForm = () => {
         formData.append("share1", share1);
         formData.append("share2", share2);
         console.log(formData);
-        const responseData = await axios.post("http://localhost:5000/showanddecrypt", formData, {
+        const responseData = await axios.post("/showanddecrypt", formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
         const { decrypteddata, finalImage } = responseData.data

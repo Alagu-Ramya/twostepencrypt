@@ -5,6 +5,10 @@ client/node_modules/
 
 .pnp.js
 
+*.jpg
+*.png
+*.jpeg
+
 # testing
 client/coverage
 

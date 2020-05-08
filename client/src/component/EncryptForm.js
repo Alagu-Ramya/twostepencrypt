@@ -27,7 +27,7 @@ const EncryptForm = () => {
         const formData = new FormData();
         formData.append("text", text);
         formData.append("file", file);
-        const responseData = await axios.post("http://localhost:5000/hideandencrypt", formData, {
+        const responseData = await axios.post("/hideandencrypt", formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
         const { share1, share2 } = responseData.data

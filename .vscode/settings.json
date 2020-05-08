@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\erwin\\.virtualenvs\\twostepencrypt-IwmHzRCl\\Scripts\\python.exe"
+    "python.pythonPath": "C:\\Users\\erwin\\.virtualenvs\\twostepencrpt-OkXV7Srz\\Scripts\\python.exe",
+    "python.formatting.provider": "black"
 }
